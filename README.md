@@ -1,6 +1,6 @@
 # orblit-script
 
-The [Orblit](https://github.com/Orblit-Engine/orblit) scripting runtime. Game logic
+The [Orblit](https://github.com/ChxisB/orblit) scripting runtime. Game logic
 in TypeScript, on QuickJS, calling the engine's C ABI directly.
 
 Orblit keeps its components in a C++ core behind a C ABI, and QuickJS is C, so
