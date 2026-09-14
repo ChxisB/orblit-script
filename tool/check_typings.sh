@@ -10,12 +10,12 @@ cd "$(dirname "$0")/.."
 
 command -v npm > /dev/null || { echo "skipped: npm not installed"; exit 0; }
 
-FIXTURES=packages/orbis_script_codegen/test/fixtures
+FIXTURES=packages/orblit_script_codegen/test/fixtures
 WORK=$(mktemp -d)
 trap 'rm -rf "$WORK"' EXIT
 
-(cd packages/orbis_script_codegen \
-  && dart run orbis_script_codegen "$OLDPWD/$FIXTURES" "$WORK/orbis.d.ts") \
+(cd packages/orblit_script_codegen \
+  && dart run orblit_script_codegen "$OLDPWD/$FIXTURES" "$WORK/orblit.d.ts") \
   > /dev/null || exit 1
 
 cp "$FIXTURES"/typescript/*.ts "$WORK/"
@@ -32,7 +32,7 @@ config() {
     "strict": true, "noEmit": true, "target": "ES2022",
     "lib": ["ES2022"], "moduleResolution": "bundler", "module": "ESNext"
   },
-  "files": ["orbis.d.ts", "$1.ts"]
+  "files": ["orblit.d.ts", "$1.ts"]
 }
 JSON
 }
@@ -41,10 +41,10 @@ config rejected
 
 failures=0
 
-if ./node_modules/.bin/tsc --project tsconfig.valid.json > /tmp/orbis_ts_valid.log 2>&1; then
+if ./node_modules/.bin/tsc --project tsconfig.valid.json > /tmp/orblit_ts_valid.log 2>&1; then
   echo "  ok    valid script type-checks"
 else
-  echo "  FAIL  valid script should compile"; cat /tmp/orbis_ts_valid.log; failures=$((failures+1))
+  echo "  FAIL  valid script should compile"; cat /tmp/orblit_ts_valid.log; failures=$((failures+1))
 fi
 
 errors=$(./node_modules/.bin/tsc --project tsconfig.rejected.json 2>&1 | grep -c 'error TS')
