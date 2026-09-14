@@ -1,9 +1,9 @@
-# orbis-script
+# orblit-script
 
-The [Orbis](https://github.com/Orbis-Engine/orbis) scripting runtime. Game logic
+The [Orblit](https://github.com/Orblit-Engine/orblit) scripting runtime. Game logic
 in TypeScript, on QuickJS, calling the engine's C ABI directly.
 
-Orbis keeps its components in a C++ core behind a C ABI, and QuickJS is C, so
+Orblit keeps its components in a C++ core behind a C ABI, and QuickJS is C, so
 script talks to the engine without Dart in the path. TypeScript is a peer of
 Dart here, not a guest inside it, and that shapes everything below: the shim is
 C, the boundary is handles and buffers, and a system reads component columns
@@ -11,7 +11,7 @@ rather than asking about entities one at a time.
 
 ```sh
 git submodule update --init --recursive
-cd packages/orbis_script && dart test
+cd packages/orblit_script && dart test
 ```
 
 ```sh
@@ -20,13 +20,13 @@ cd packages/orbis_script && dart test
 
 ## Interfaces
 
-`orbis_script_ui` is how a script draws. TypeScript describes a tree and Dart
+`orblit_script_ui` is how a script draws. TypeScript describes a tree and Dart
 builds the real Flutter widgets for it — no reconciler, no retained tree, and
 no second layout engine underneath. What is borrowed is the *styling*
 vocabulary, because that is the part a web developer already knows:
 
 ```ts
-import { column, row, text, button, mount } from "@orbis/ui";
+import { column, row, text, button, mount } from "@orblit/ui";
 
 let score = 0;
 
@@ -63,7 +63,7 @@ out by Flutter and drawn by Impeller.
 exceptions, microtask pumping, and unhandled promise rejections surfaced rather
 than dropped.
 
-**S2 done** — `orbis_script_codegen` reads the component manifests an Orbis
+**S2 done** — `orblit_script_codegen` reads the component manifests an Orblit
 workspace publishes and emits TypeScript typings for them. It reads JSON and
 nothing else, so it learns what the engine declares without depending on the
 engine at all — the two repositories share a contract, not a build.
