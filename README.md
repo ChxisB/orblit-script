@@ -73,5 +73,9 @@ script can actually call.
 
 ## Licence
 
-MIT, © 2026 Chris Beckett. Bundles quickjs-ng, also MIT and under its own copyright —
-see [LICENSE](LICENSE).
+FSL-1.1-MIT, © 2026 Chris Beckett — use it, fork it and ship games with it,
+commercial ones included, but don't offer it as a competing product. Each
+release becomes MIT two years after it's published.
+
+Bundles quickjs-ng, which is MIT and under its own copyright — see
+[LICENSE](LICENSE).
