@@ -30,7 +30,7 @@ void main() {
 
     test('the runtime is the compiled library, not a copy of it', () {
       // If this ever fails, the embedded runtime is stale: run
-      // `npm run build:ui && dart run tool/embed_runtime.dart`.
+      // `npm run build:ui` at the repository root.
       expect(UiRuntime.length, greaterThan(2000));
       expect(host.eval('typeof globalThis.h'), 'function');
       expect(host.eval('typeof globalThis.Fragment'), 'function');

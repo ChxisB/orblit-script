@@ -27,6 +27,12 @@ dev_dependencies:
   # description came from.
   orblit_script:
     path: ../orblit_script
+
+  # For the one test that loads both runtimes at once, which is what a game
+  # with an interface and a world does. Neither package can see the other, so
+  # nothing else would notice them treading on each other.
+  orblit_script_scene:
+    path: ../orblit_script_scene
   flutter_lints: ^5.0.0
   flutter_test:
     sdk: flutter
