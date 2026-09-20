@@ -73,9 +73,11 @@ script can actually call.
 
 ## Licence
 
-FSL-1.1-MIT, © 2026 Chris Beckett — use it, fork it and ship games with it,
-commercial ones included, but don't offer it as a competing product. Each
-release becomes MIT two years after it's published.
+MPL-2.0, © 2026 Chris Beckett — the Mozilla Public License, and open source.
+Use it, fork it and ship games with it, commercial ones included; your game
+stays yours and the licence does not reach into it. What it asks is that
+changes to this repository's own files ship under the same licence, so engine
+work stays in the open.
 
 Bundles quickjs-ng, which is MIT and under its own copyright — see
 [LICENSE](LICENSE).
