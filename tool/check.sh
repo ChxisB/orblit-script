@@ -3,7 +3,11 @@
 set -uo pipefail
 cd "$(dirname "$0")/.."
 
-PACKAGES=(packages/orblit_script packages/orblit_script_codegen)
+PACKAGES=(
+  packages/orblit_script
+  packages/orblit_script_codegen
+  packages/orblit_script_scene
+)
 
 # The interface layer is the one package here that draws anything, so it
 # resolves and runs with Flutter rather than Dart.
