@@ -4,8 +4,8 @@ The [Orblit](https://github.com/ChxisB/orblit) scripting runtime. Game logic
 in TypeScript, on QuickJS, calling the engine's C ABI directly.
 
 Orblit keeps its components in a C++ core behind a C ABI, and QuickJS is C, so
-script talks to the engine without Dart in the path. TypeScript is a peer of
-Dart here, not a guest inside it, and that shapes everything below: the shim is
+a script talks to the engine without Dart in the path. TypeScript is a peer of
+Dart here, not a guest inside it, and that shapes everything below. The shim is
 C, the boundary is handles and buffers, and a system reads component columns
 rather than asking about entities one at a time.
 
@@ -20,10 +20,11 @@ cd packages/orblit_script && dart test
 
 ## Interfaces
 
-`orblit_script_ui` is how a script draws. TypeScript describes a tree and Dart
-builds the real Flutter widgets for it — no reconciler, no retained tree, and
-no second layout engine underneath. What is borrowed is the *styling*
-vocabulary, because that is the part a web developer already knows:
+`orblit_script_ui` is how a script draws. TypeScript describes a tree, and
+Dart builds the real Flutter widgets for it. There is no reconciler, no
+retained tree, and no second layout engine underneath. What is borrowed is the
+*styling* vocabulary, because that is the part a web developer already
+knows:
 
 ```ts
 import { column, row, text, button, mount } from "@orblit/ui";
@@ -45,39 +46,39 @@ mount(() =>
 ```
 
 Both notations resolve to the same style, and CSS is laid over the class list
-rather than replacing it. `p-4` is four steps of the theme's spacing scale;
+rather than replacing it. `p-4` is four steps of the theme's spacing scale.
 `p-[13]` is thirteen pixels, for the one measurement in a design that does not
-sit on the grid. A class nobody knows is ignored rather than fatal — an
-interface that refuses to draw because a word was misspelt is worse than one
-that draws without the rounded corner — and `unknownIn` lists what was ignored
-for anybody who wants to be told.
+sit on the grid. A class nobody knows is ignored rather than fatal, because an
+interface that refuses to draw over a misspelt word is worse than one that
+draws without the rounded corner. `unknownIn` lists what was ignored, for
+anybody who wants to be told.
 
 What it deliberately is not is a second component set. The elements are the
-ones a layout needs — `box`, `row`, `column`, `stack`, `text`, `button`,
-`field`, `image`, `spacer` — and they resolve to Flutter's own widgets, laid
-out by Flutter and drawn by Impeller.
+ones a layout needs: `box`, `row`, `column`, `stack`, `text`, `button`,
+`field`, `image` and `spacer`. They resolve to Flutter's own widgets, laid out
+by Flutter and drawn by Impeller.
 
 ## Status
 
-**S0 done** — the VM runs. Evaluation, JavaScript stacks carried into Dart
-exceptions, microtask pumping, and unhandled promise rejections surfaced rather
+**S0 done.** The VM runs. Evaluation, JavaScript stacks carried into Dart
+exceptions, microtask pumping, and unhandled promise rejections reported rather
 than dropped.
 
-**S2 done** — `orblit_script_codegen` reads the component manifests an Orblit
-workspace publishes and emits TypeScript typings for them. It reads JSON and
+**S2 done.** `orblit_script_codegen` reads the component manifests an Orblit
+workspace publishes, and emits TypeScript typings for them. It reads JSON and
 nothing else, so it learns what the engine declares without depending on the
-engine at all — the two repositories share a contract, not a build.
+engine at all. The two repositories share a contract, not a build.
 
-**S1 next** — binding the engine's C ABI, so the typings describe something a
+**S1 next.** Binding the engine's C ABI, so the typings describe something a
 script can actually call.
 
 ## Licence
 
-MPL-2.0, © 2026 Chris Beckett — the Mozilla Public License, and open source.
-Use it, fork it and ship games with it, commercial ones included; your game
-stays yours and the licence does not reach into it. What it asks is that
-changes to this repository's own files ship under the same licence, so engine
-work stays in the open.
+MPL-2.0, © 2026 Chris Beckett. That is the Mozilla Public License, and it is
+open source. Use it, fork it and ship games with it, including commercial ones.
+Your game stays yours, and the licence does not reach into it. What it asks is
+that changes to this repository's own files ship under the same licence, so
+engine work stays in the open.
 
-Bundles quickjs-ng, which is MIT and under its own copyright — see
+Bundles quickjs-ng, which is MIT and under its own copyright. See
 [LICENSE](LICENSE).
