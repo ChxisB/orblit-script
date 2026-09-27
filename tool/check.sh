@@ -18,7 +18,7 @@ for package in "${PACKAGES[@]}"; do
   echo "== $package =="
   (cd "$package" && dart pub get > /dev/null 2>&1)
 
-  if (cd "$package" && dart analyze > /tmp/orblit_analyze.log 2>&1); then
+  if (cd "$package" && dart analyze --fatal-infos > /tmp/orblit_analyze.log 2>&1); then
     echo "  ok    analyze"
   else
     echo "  FAIL  analyze"; tail -20 /tmp/orblit_analyze.log; failures=$((failures+1))
@@ -41,7 +41,7 @@ for package in "${FLUTTER_PACKAGES[@]}"; do
   fi
   (cd "$package" && flutter pub get > /dev/null 2>&1)
 
-  if (cd "$package" && dart analyze > /tmp/orblit_analyze.log 2>&1); then
+  if (cd "$package" && dart analyze --fatal-infos > /tmp/orblit_analyze.log 2>&1); then
     echo "  ok    analyze"
   else
     echo "  FAIL  analyze"; tail -20 /tmp/orblit_analyze.log; failures=$((failures+1))
